@@ -1,0 +1,90 @@
+# -*- coding: utf-8 -*-
+import json
+import random
+
+from django.http import HttpResponse
+from django.shortcuts import render
+from django.views.decorators.csrf import csrf_protect
+from recommend_food.models import Categories, Regions, Restaurants, Foods
+
+
+#그냥 메인 화면 보여줌
+def index(request):
+	return render(request, 'Main/index.html')
+
+#메인화면에서 검색하는걸 기준으로 작성
+@csrf_protect
+def search(request):
+	if random.random() <= 0.01:
+		result = \
+		[
+			{
+				"state":"0"
+			}
+		]
+
+		return HttpResponse(json.dumps(result), content_type='application/json')
+
+	#배달주문할 때는 지역이 중요하지 않기 때문에 지역은 일단 빼기로 함
+	try:
+		checked_categories = request.POST.getlist('category')
+
+		while checked_categories:
+			category_pk = random.choice(checked_categories)
+			restaurant_list = Restaurants.objects.filter(Category=category_pk)
+
+			if not restaurant_list:
+				checked_categories.remove(category_pk)
+				continue
+
+			while restaurant_list:
+				restaurant = random.choice(restaurant_list)
+				food_list = Foods.objects.filter(Restaurant=restaurant.pk)
+
+				if not food_list:
+					restaurant_list.remove(restaurant)
+					continue
+
+				food = random.choice(food_list)
+				break;
+
+			category = Categories.objects.get(pk=category_pk)
+			region = restaurant.Region
+
+			result = \
+			[
+				{
+					"state":"3", 
+					"category_name":category.Name, 
+					"region_name":region.Name, 
+					"restaurant_name":restaurant.Name, 
+					"restaurant_phonenumber":restaurant.PhoneNumber,
+					"food_name":food.Name, 
+					"food_price":food.Price
+				}
+			]
+	
+			return HttpResponse(json.dumps(result), content_type='application/json')
+
+		else:
+			result = \
+			[
+				{
+					"state":"1"
+				}
+			]
+			return HttpResponse(json.dumps(result), content_type='application/json')
+				
+	except Exception,e:
+		result = \
+		[
+			{
+				"state":"2"
+			}
+		]
+
+		print(e)
+		return HttpResponse(json.dumps(result), content_type='application/json')
+
+#상세 검색을 짤 때 가격대도 같이 고려할 수 있도록 하자
+#잡길 서비스 거부(?)
