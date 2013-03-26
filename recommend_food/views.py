@@ -5,6 +5,8 @@ import random
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_protect
+from django.template import loader
+from django.db.models import Q
 from recommend_food.models import Categories, Regions, Restaurants, Foods
 
 
@@ -85,6 +87,42 @@ def search(request):
 
 		print(e)
 		return HttpResponse(json.dumps(result), content_type='application/json')
+
+def loadAdvancedSearch(request):
+	return render(request, 'Main/advancedSearch.html')
+
+#조건에 맞는 음식점을 전부 출력함
+@csrf_protect
+def restaurantSearch(request):
+	checked_categories = request.POST.getlist('category')
+	checked_regions = request.POST.getlist('region')
+
+	try:
+		restaurant = Restaurant.objects.filter(Q(Category_id__in=checked_categories) | Q(Region_id__in=checked_regions))
+		result = \
+		[
+			{
+				"state":"3"
+			}
+		]
+	
+		return HttpResponse(json.dumps(result), content_type='application/json')
+
+	except Exception,e:
+		result = \
+		[
+			{
+				"state":"2"
+			}
+		]
+
+		print(e)
+		return HttpResponse(json.dumps(result), content_type='application/json')
+
+
+
+
+	
 
 #상세 검색을 짤 때 가격대도 같이 고려할 수 있도록 하자
 #잡길 서비스 거부(?)

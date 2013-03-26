@@ -1,48 +1,47 @@
 {% extends "Layout/base.html" %}
 
-{% block advancedSearch %}
-<form id="advancedSearcher" name="advanced_sercher" action="">
-	<table>
-		<tr>
-			<td>분류</td>
-			<td>
-				전체선택<br />
-				전체해제
-			</td>
-				<input type="checkbox" name="category" value="1" /><label for="1">한식</label>
-				<input type="checkbox" name="category" value="2" /><label for="2">분식</label>
-				<input type="checkbox" name="category" value="3" /><label for="3">피자</label>
-				<input type="checkbox" name="category" value="4" /><label for="4">치킨</label>
-				<input type="checkbox" name="category" value="5" /><label for="5">일식</label>
-				<input type="checkbox" name="category" value="6" /><label for="6">냉면</label>
-				<input type="checkbox" name="category" value="7" /><label for="7">도시락</label>
-				<input type="checkbox" name="category" value="8" /><label for="8">기타</label>
-			<td>
-			</td>
-		</tr>
-			<td>지역</td>
-			<td>
-				전체선택<br />
-				전체해제
-			</td>
-				<input type="checkbox" name="region" value="1" /><label for="1">녹두</label>
-				<input type="checkbox" name="region" value="2" /><label for="2">서울대입구역</label>
-				<input type="checkbox" name="region" value="3" /><label for="3">학교</label>
-				<input type="checkbox" name="region" value="4" /><label for="4">기타</label>
-			<td>
-			</td>
-		<tr>
-			<td>음식점</td>
-			<td>
-				전체선택<br />
-				전체해제
-			</td>
-			<td>
-			</td>
-		</tr>
-		<tr>
-			<td><input type="submit" name="advanced_search" value="음식점 찾기!"></td>
-		</tr>
-	</table>
-</form>
+{% block content %}
+<div>
+	<form id="advancedRestaurantSearcher" name="advanced_sercher" action="">
+		<table border=1>
+			<tr>
+				<td>분류</td>
+				<td>
+					전체선택<br />
+					전체해제
+				</td>
+				<td>
+					<input type="checkbox" name="category" value="1" /><label for="1">한식</label>
+					<input type="checkbox" name="category" value="2" /><label for="2">분식</label>
+					<input type="checkbox" name="category" value="3" /><label for="3">피자</label>
+					<input type="checkbox" name="category" value="4" /><label for="4">치킨</label>
+					<input type="checkbox" name="category" value="5" /><label for="5">일식</label>
+					<input type="checkbox" name="category" value="6" /><label for="6">냉면</label>
+					<input type="checkbox" name="category" value="7" /><label for="7">도시락</label>
+					<input type="checkbox" name="category" value="8" /><label for="8">기타</label>
+				</td>
+			</tr>
+				<td>지역</td>
+				<td>
+					전체선택<br />
+					전체해제
+				</td>
+				<td>
+					<input type="checkbox" name="region" value="1" /><label for="1">녹두</label>
+					<input type="checkbox" name="region" value="2" /><label for="2">서울대입구역</label>
+					<input type="checkbox" name="region" value="3" /><label for="3">학교</label>
+					<input type="checkbox" name="region" value="4" /><label for="4">기타</label>
+				</td>
+			<tr>
+				<td colspan=3>
+					<input id="FindRestaurants" type="submit" name="find_restaurant" value="음식점 찾기!">
+				</td>
+			</tr>
+		</table>
+	</form>
+</div>
+
+<div id="RestaurantResult">
+
+</div>
 {% endblock %}
