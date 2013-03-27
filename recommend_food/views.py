@@ -126,3 +126,5 @@ def restaurantSearch(request):
 
 #상세 검색을 짤 때 가격대도 같이 고려할 수 있도록 하자
 #잡길 서비스 거부(?)
+def loadRegisterRestaurant(request):
+	return render(request, 'Main/registerRestaurant.html')

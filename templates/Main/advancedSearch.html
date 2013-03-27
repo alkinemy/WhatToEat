@@ -1,5 +1,9 @@
 {% extends "Layout/base.html" %}
 
+{% block contentTitle %}
+<h1>밥 뭐 먹지? - 상세검색</h1>
+{% endblock %}
+
 {% block content %}
 <div>
 	<form id="advancedRestaurantSearcher" name="advanced_sercher" action="">
@@ -11,14 +15,14 @@
 					전체해제
 				</td>
 				<td>
-					<input type="checkbox" name="category" value="1" /><label for="1">한식</label>
-					<input type="checkbox" name="category" value="2" /><label for="2">분식</label>
-					<input type="checkbox" name="category" value="3" /><label for="3">피자</label>
-					<input type="checkbox" name="category" value="4" /><label for="4">치킨</label>
-					<input type="checkbox" name="category" value="5" /><label for="5">일식</label>
-					<input type="checkbox" name="category" value="6" /><label for="6">냉면</label>
-					<input type="checkbox" name="category" value="7" /><label for="7">도시락</label>
-					<input type="checkbox" name="category" value="8" /><label for="8">기타</label>
+					<input id="checkboxHansik" type="checkbox" name="category" value="1" /><label for="checkboxHansik">한식</label>
+					<input id="checkboxBunsik" type="checkbox" name="category" value="2" /><label for="checkboxBunsik">분식</label>
+					<input id="checkboxPizza" type="checkbox" name="category" value="3" /><label for="checkboxPizza">피자</label>
+					<input id="checkboxChicken" type="checkbox" name="category" value="4" /><label for="checkboxChicken">치킨</label>
+					<input id="checkboxIlsik" type="checkbox" name="category" value="5" /><label for="checkboxIlsik">일식</label>
+					<input id="checkboxNaengmyon" type="checkbox" name="category" value="6" /><label for="checkboxNaengmyon">냉면</label>
+					<input id="checkboxDosirak" type="checkbox" name="category" value="7" /><label for="checkboxDosirak">도시락</label>
+					<input id="checkboxCategoryEtc" type="checkbox" name="category" value="8" /><label for="checkboxCategoryEtc">기타</label>
 				</td>
 			</tr>
 				<td>지역</td>
@@ -27,10 +31,10 @@
 					전체해제
 				</td>
 				<td>
-					<input type="checkbox" name="region" value="1" /><label for="1">녹두</label>
-					<input type="checkbox" name="region" value="2" /><label for="2">서울대입구역</label>
-					<input type="checkbox" name="region" value="3" /><label for="3">학교</label>
-					<input type="checkbox" name="region" value="4" /><label for="4">기타</label>
+					<input id="checkboxNokdu" type="checkbox" name="region" value="1" /><label for="checkboxNokdu">녹두</label>
+					<input id="checkboxSNUStation" type="checkbox" name="region" value="2" /><label for="checkboxSNUStation">서울대입구역</label>
+					<input id="checkboxSNU" type="checkbox" name="region" value="3" /><label for="checkboxSNU">학교</label>
+					<input id="checkboxRegionEtc" type="checkbox" name="region" value="4" /><label for="checkboxRegionEtc">기타</label>
 				</td>
 			<tr>
 				<td colspan=3>

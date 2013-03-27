@@ -1,18 +1,21 @@
 {% extends "Layout/base.html" %}
 
-{% block content %}
+{% block contentTitle %}
 <h1>밥 뭐 먹지?</h1>
+{% endblock %}
+
+{% block content %}
 <form id= "FoodSearcher" name="food_searcher" action="">
 	{% csrf_token %}
 	<fieldset>
-		<input class="checkboxHansik" type="checkbox" name="category" value="1" checked /><label for="1" class="categoryHansik">한식</label>
-		<input class="checkboxBunsik" type="checkbox" name="category" value="2" checked /><label for="2" class="categoryBunsik">분식</label>
-		<input class="checkboxPizza" type="checkbox" name="category" value="3" checked /><label for="3" class="categoryPizza">피자</label>
-		<input class="checkboxChicken" type="checkbox" name="category" value="4" checked /><label for="4" class="categoryChicken">치킨</label>
-		<input class="checkboxIlsik" type="checkbox" name="category" value="5" checked /><label for="5"class="categoryIlsik">일식</label>
-		<input class="checkboxNaengmyon" type="checkbox" name="category" value="6" checked /><label for="6"  class="categoryNaengmyon">냉면</label>
-		<input class="checkboxDosirak" type="checkbox" name="category" value="7" checked /><label for="7" class="categoryDosirak">도시락</label>
-		<input class="checkboxEtc" type="checkbox" name="category" value="8" checked /><label for="8" class="categoryEtc">기타</label>
+		<input id="checkboxHansik" type="checkbox" name="category" value="1" checked /><label for="checkboxHansik">한식</label>
+		<input id="checkboxBunsik" type="checkbox" name="category" value="2" checked /><label for="checkboxBunsik">분식</label>
+		<input id="checkboxPizza" type="checkbox" name="category" value="3" checked /><label for="checkboxPizza">피자</label>
+		<input id="checkboxChicken" type="checkbox" name="category" value="4" checked /><label for="checkboxChicken">치킨</label>
+		<input id="checkboxIlsik" type="checkbox" name="category" value="5" checked /><label for="checkboxIlsik">일식</label>
+		<input id="checkboxNaengmyon" type="checkbox" name="category" value="6" checked /><label for="checkboxNaengmyon">냉면</label>
+		<input id="checkboxDosirak" type="checkbox" name="category" value="7" checked /><label for="checkboxDosirak">도시락</label>
+		<input id="checkboxEtc" type="checkbox" name="category" value="8" checked /><label for="checkboxEtc">기타</label>
 	</fieldset>
 	<br /><br />
 	<input type="submit" name="search" value="음식점 찾기!" />
