@@ -40,7 +40,7 @@ $(document).ready(function() {
 		event.preventDefault();
 	});
 
-	$('#advancedRestaurantSearcher').submit(function() {
+	/*$('#advancedRestaurantSearcher').submit(function() {
 		alert("아직 안짬");
 		data = $('#FindRestaurant').serialize();
 
@@ -57,6 +57,6 @@ $(document).ready(function() {
 				//alert("responseText: "+xhr.responseText);
 			}
 		});
-		event.preventDefault();*/
-	});
+		event.preventDefault();
+	});*/
 });

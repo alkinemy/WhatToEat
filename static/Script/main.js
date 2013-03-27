@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	$(".categoryHansik").click(function() {
+	/*$(".categoryHansik").click(function() {
 		if ($(".checkboxHansik").is(":checked")) {
 			$(".checkboxHansik").prop("checked", false);
 		}
@@ -62,5 +62,5 @@ $(document).ready(function() {
 		else {
 			$(".checkboxHansik").prop("checked", true);
 		}
-	});
+	});*/
 });
