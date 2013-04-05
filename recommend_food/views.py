@@ -141,9 +141,12 @@ def registerRestaurant(request):
 
 		foods_name = request.POST.getlist('food_name')
 		foods_price = request.POST.getlist('food_price')
+		foods_detail = request.POST.getlist('food_detail')
 
 		category_object = Categories.objects.get(pk=int(checked_category))
 		region_object = Regions.objects.get(pk=int(checked_region))
+
+		#db에 등록하기 전에 validation 작업이 필요할 듯
 
 		new_restaurant = Restaurants(Name=restaurant_name, Category=category_object, PhoneNumber=restaurant_phone, Region=region_object, Detail=restaurant_detail)
 		new_restaurant.save()

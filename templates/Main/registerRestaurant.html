@@ -11,30 +11,31 @@
 		<table id="restaurantTable" border=1>
 			<tbody>
 				<tr>
+					<td colspan=6>
+						음식점 정보
+					</td>
+				</tr>
+				<tr>
 					<td>
 						음식점 이름
 					</td>
-					<td colspan=3>
+					<td colspan=5>
 						<input type="text" name="restaurant_name" />
 					</td>
 				</tr>
-			</tbody>
-			<tbody>
 				<tr>
 					<td>
 						전화번호
 					</td>
-					<td colspan=3>
+					<td colspan=5>
 						<input type="text" name="restaurant_phone" />
 					</td>
 				</tr>
-			</tbody>
-			<tbody>
 				<tr>
 					<td>
 						분류		
 					</td>
-					<td colspan=3>
+					<td colspan=5>
 						<input id="radioHansik" type="radio" name="category" value="1" /><label for="radioHansik">한식</label>
 						<input id="radioBunsik" type="radio" name="category" value="2" /><label for="radioBunsik">분식</label>
 						<input id="radioPizza" type="radio" name="category" value="3" /><label for="radioPizza">피자</label>
@@ -45,24 +46,30 @@
 						<input id="radioCategoryEtc" type="radio" name="category" value="8" /><label for="radioCategoryEtc">기타</label>
 					</td>
 				</tr>
-			</tbody>
-			<tbody>
 				<tr>
 					<td>
 						지역		
 					</td>
-					<td colspan=3>
+					<td colspan=5>
 						<input id="radioNokdu" type="radio" name="region" value="1" /><label for="radioNokdu">녹두</label>
 						<input id="radioSNUStation" type="radio" name="region" value="2" /><label for="radioSNUStation">서울대입구역</label>
 						<input id="radioSNU" type="radio" name="region" value="3" /><label for="radioSNU">학교</label>
 						<input id="radioRegionEtc" type="radio" name="region" value="4" /><label for="radioRegionEtc">기타</label>
 					</td>
 				</tr>
+				<tr>
+					<td>
+						음식점 특이사항
+					</td>
+					<td colspan=5>
+						<textarea name="restaurant_detail" form="registerRestaurantForm"></textarea>
+					</td>
+				</tr>
 			</tbody>
 			<tbody id='foodTextbox'>
 				<tr>
-					<td colspan=4>
-						음식 등록	
+					<td colspan=6>
+						음식 정보 	
 						<button id="addFoodButton" type="button">음식 입력칸 추가</button>
 					</td>
 				</tr>
@@ -79,23 +86,17 @@
 					<td>
 						<input type="textbox" name="food_price" />
 					</td>
-				</tr>
-			</tbody>
-			<tbody>
-				<tr>
-					<td colspan=4>
-						기타 특징
+					<td>
+						특이사항
 					</td>
-				</tr>
-				<tr>
-					<td colspan>
-						<input type="textarea" name="restaurant_detail" />
+					<td>
+						<input type="textbox" name="food_detail" />
 					</td>
 				</tr>
 			</tbody>
 			<tfoot>
 				<tr>
-					<td colspan=4>
+					<td colspan=6>
 						<input type="submit" name="register" value="음식점 등록!" />
 					</td>
 				</tr>

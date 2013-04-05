@@ -29,6 +29,7 @@ class Foods(models.Model):
 	Name = models.CharField(max_length=200)
 	Price = models.IntegerField()
 	Restaurant = models.ForeignKey(Restaurants)
+	Detail = models.TextField(null=True)
 
 	def __unicode__(self):
 		return self.Name
