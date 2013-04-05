@@ -1,6 +1,7 @@
 $(document).ready(function() {
 	$("#addFoodButton").click(function() {
-		$("#restaurantTable").append('<tr><td>이름</td><td><input type="textbox" name="food_name" /></td><td>가격</td><td><input type="textbox" name="food_price" /></td></tr>');
+		//$("#restaurantTable").append('<tr><td>이름</td><td><input type="textbox" name="food_name" /></td><td>가격</td><td><input type="textbox" name="food_price" /></td></tr>');
+		$("#foodTextbox tr:last").after('<tr><td>이름</td><td><input type="textbox" name="food_name" /></td><td>가격</td><td><input type="textbox" name="food_price" /></td></tr>');
 	});
 
 

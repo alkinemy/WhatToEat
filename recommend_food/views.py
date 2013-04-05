@@ -135,6 +135,7 @@ def registerRestaurant(request):
 	try:
 		restaurant_name = request.POST.get('restaurant_name')
 		restaurant_phone = request.POST.get('restaurant_phone')
+		restaurant_detail = request.POST.get('restaurant_detail')
 		checked_category = request.POST.get('category')
 		checked_region = request.POST.get('region')
 
@@ -144,7 +145,7 @@ def registerRestaurant(request):
 		category_object = Categories.objects.get(pk=int(checked_category))
 		region_object = Regions.objects.get(pk=int(checked_region))
 
-		new_restaurant = Restaurants(Name=restaurant_name, Category=category_object, PhoneNumber=restaurant_phone, Region=region_object)
+		new_restaurant = Restaurants(Name=restaurant_name, Category=category_object, PhoneNumber=restaurant_phone, Region=region_object, Detail=restaurant_detail)
 		new_restaurant.save()
 
 		for i in range(len(foods_name)):

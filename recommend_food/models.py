@@ -20,6 +20,7 @@ class Restaurants(models.Model):
 	Category = models.ForeignKey(Categories)
 	PhoneNumber = models.CharField(max_length=200)
 	Region = models.ForeignKey(Regions)
+	Detail = models.TextField(null=True)
 	
 	def __unicode__(self):
 		return self.Name
