@@ -11,7 +11,6 @@ class Categories(models.Model):
 	
 class Regions(models.Model):
 	Name = models.CharField(max_length=200)
-	Category = models.ForeignKey(Categories)
 	
 	def __unicode__(self):
 		return self.Name

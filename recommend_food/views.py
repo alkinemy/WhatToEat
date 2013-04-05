@@ -128,3 +128,47 @@ def restaurantSearch(request):
 #잡길 서비스 거부(?)
 def loadRegisterRestaurant(request):
 	return render(request, 'Main/registerRestaurant.html')
+
+
+@csrf_protect
+def registerRestaurant(request):
+	try:
+		restaurant_name = request.POST.get('restaurant_name')
+		restaurant_phone = request.POST.get('restaurant_phone')
+		checked_category = request.POST.get('category')
+		checked_region = request.POST.get('region')
+
+		foods_name = request.POST.getlist('food_name')
+		foods_price = request.POST.getlist('food_price')
+
+		category_object = Categories.objects.get(pk=int(checked_category))
+		region_object = Regions.objects.get(pk=int(checked_region))
+
+		new_restaurant = Restaurants(Name=restaurant_name, Category=category_object, PhoneNumber=restaurant_phone, Region=region_object)
+		new_restaurant.save()
+
+		for i in range(len(foods_name)):
+			new_food = Foods(Name=foods_name[i], Price=int(foods_price[i]), Restaurant=new_restaurant)
+			new_food.save()
+			
+
+		result = \
+		[
+			{
+				"state":"0"
+			}
+		]
+
+		return HttpResponse(json.dumps(result), content_type='application/json')
+
+
+	except Exception,e:
+		result = \
+		[
+			{
+				"state":"1"
+			}
+		]
+
+		print(e)
+		return HttpResponse(json.dumps(result), content_type='application/json')

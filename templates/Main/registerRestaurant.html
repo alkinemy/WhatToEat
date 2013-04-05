@@ -6,14 +6,23 @@
 
 {% block content %}
 <form id="registerRestaurantForm" name="register_restaurant" action="">
+	{% csrf_token %}
 	<fieldset>
-		<table border=1>
+		<table id="restaurantTable" border=1>
 			<tr>
 				<td>
 					음식점 이름
 				</td>
 				<td colspan=3>
-					<input type="text" name="restaurant_name" /><br />
+					<input type="text" name="restaurant_name" />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					전화번호
+				</td>
+				<td colspan=3>
+					<input type="text" name="restaurant_phone" />
 				</td>
 			</tr>
 			<tr>
@@ -21,14 +30,14 @@
 					분류		
 				</td>
 				<td colspan=3>
-					<input id="checkboxHansik" type="checkbox" name="category" value="1" /><label for="checkboxHansik">한식</label>
-					<input id="checkboxBunsik" type="checkbox" name="category" value="2" /><label for="checkboxBunsik">분식</label>
-					<input id="checkboxPizza" type="checkbox" name="category" value="3" /><label for="checkboxPizza">피자</label>
-					<input id="checkboxChicken" type="checkbox" name="category" value="4" /><label for="checkboxChicken">치킨</label>
-					<input id="checkboxIlsik" type="checkbox" name="category" value="5" /><label for="checkboxIlsik">일식</label>
-					<input id="checkboxNaengmyon" type="checkbox" name="category" value="6" /><label for="checkboxNaengmyon">냉면</label>
-					<input id="checkboxDosirak" type="checkbox" name="category" value="7" /><label for="checkboxDosirak">도시락</label>
-					<input id="checkboxCategoryEtc" type="checkbox" name="category" value="8" /><label for="checkboxCategoryEtc">기타</label>
+					<input id="radioHansik" type="radio" name="category" value="1" /><label for="radioHansik">한식</label>
+					<input id="radioBunsik" type="radio" name="category" value="2" /><label for="radioBunsik">분식</label>
+					<input id="radioPizza" type="radio" name="category" value="3" /><label for="radioPizza">피자</label>
+					<input id="radioChicken" type="radio" name="category" value="4" /><label for="radioChicken">치킨</label>
+					<input id="radioIlsik" type="radio" name="category" value="5" /><label for="radioIlsik">일식</label>
+					<input id="radioNaengmyon" type="radio" name="category" value="6" /><label for="radioNaengmyon">냉면</label>
+					<input id="radioDosirak" type="radio" name="category" value="7" /><label for="radioDosirak">도시락</label>
+					<input id="radioCategoryEtc" type="radio" name="category" value="8" /><label for="radioCategoryEtc">기타</label>
 				</td>
 			</tr>
 			<tr>
@@ -44,7 +53,7 @@
 			</tr>
 				<td colspan=4>
 					음식 등록	
-					<button id="addFood" type="button">음식 입력칸 추가</button>
+					<button id="addFoodButton" type="button">음식 입력칸 추가</button>
 				</td>
 			<tr>
 				<td>
@@ -60,12 +69,13 @@
 					<input type="textbox" name="food_price" />
 				</td>
 			</tr>
-			<tr>
+			<!--<tr>
 				<td colspan=4>
 					<input type="submit" name="register" value="음식점 등록!" />
 				</td>
-			</tr>
+			</tr>-->
 		</table>
+		<input type="submit" name="register" value="음식점 등록!" />
 	</fieldset>
 </form>
 {% endblock %}

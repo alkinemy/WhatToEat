@@ -7,5 +7,6 @@ urlpatterns = patterns('',
 	url(r'^$', views.index, name='index'),
 	url(r'^search/$', views.search, name='search'),
 	url(r'^advancedSearch/$', views.loadAdvancedSearch, name='advancedSearch'),
-	url(r'^register/$', views.loadRegisterRestaurant, name='registerRestaurant'),
+	url(r'^register/$', views.loadRegisterRestaurant, name='register'),
+	url(r'^registerRestaurant/$', views.registerRestaurant, name='registerRestaurant'),
 )
