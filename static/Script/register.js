@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	$("#addFoodButton").click(function() {
-		$("#foodTextbox tr:last").after('<tr><td>이름</td><td><input type="textbox" name="food_name" /></td><td>가격</td><td><input type="textbox" name="food_price" /></td><td>특이사항</td><td><input type="textbox" name="food_detail" /></td></tr>');
+		$("#foodTextbox tr:last").after('<form id="registerFoodForm" name="register_food" action="">{% csrf_token %}<tr><td>이름</td><td><input type="textbox" name="food_name" /></td><td>가격</td><td><input type="textbox" name="food_price" /></td><td>특이사항</td><td><input type="textbox" name="food_detail" /></td></tr></form>');
 	});
 
 
