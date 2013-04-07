@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}CSS/base_style.css" />
+		<script type="text/javascript" src="{{STATIC_URL}}Script/Jquery/jquery-1.9.1.min.js"></script>
+		<script type="text/javascript" src="{{STATIC_URL}}Script/main.js"></script>
+		<script type="text/javascript" src="{{STATIC_URL}}Script/list.js"></script>
+
+		<title>{% block pageTitle %}{% endblock%}</title>
+	</head>
+	<body>
+		<header>
+			{% block contentTitle %}
+			{% endblock %}
+		</header>
+		<section id="content">
+			{% block content %}
+			{% endblock %}
+		</section>
+	</body>
+</html>

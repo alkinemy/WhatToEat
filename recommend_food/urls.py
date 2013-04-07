@@ -9,4 +9,6 @@ urlpatterns = patterns('',
 	url(r'^advancedSearch/$', views.loadAdvancedSearch, name='advancedSearch'),
 	url(r'^register/$', views.loadRegisterRestaurant, name='register'),
 	url(r'^registerRestaurant/$', views.registerRestaurant, name='registerRestaurant'),
+	url(r'^restaurantList/$', views.restaurantList, name='restaurantList'),
+	url(r'^loadRestaurantList/$', views.loadRestaurantList, name='loadRestaurantList'),
 )

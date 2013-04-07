@@ -1,0 +1,27 @@
+{% extends "Layout/base_restaurant_list.html" %}
+
+{% block pageTitle %}
+밥 뭐 먹지? - 음식점 리스트
+{% endblock %}
+
+{% block contentTitle %}
+<h1>밥 뭐 먹지? - 음식점 리스트</h1>
+{% endblock %}
+
+{% block content %}
+<section>
+	<form id="loadRestaurantListForm" name="load_restaurant_list" action="">
+	{% csrf_token %}
+		<input id="radioHansik" class="radioCategory" type="radio" name="category" value="1" /><label for="radioHansik">한식</label>
+		<input id="radioBunsik" class="radioCategory" type="radio" name="category" value="2" /><label for="radioBunsik">분식</label>
+		<input id="radioPizza" class="radioCategory" type="radio" name="category" value="3" /><label for="radioPizza">피자</label>
+		<input id="radioChicken" class="radioCategory" type="radio" name="category" value="4" /><label for="radioChicken">치킨</label>
+		<input id="radioIlsik" class="radioCategory" type="radio" name="category" value="5" /><label for="radioIlsik">일식</label>
+		<input id="radioNaengmyon" class="radioCategory" type="radio" name="category" value="6" /><label for="radioNaengmyon">냉면</label>
+		<input id="radioDosirak" class="radioCategory" type="radio" name="category" value="7" /><label for="radioDosirak">도시락</label>
+		<input id="radioEtc" class="radioCategory" type="radio" name="category" value="8" /><label for="radioEtc">기타</label>
+	</form>
+</section>
+<section id="showList">
+</section>
+{% endblock %}

@@ -176,3 +176,39 @@ def registerRestaurant(request):
 
 		print(e)
 		return HttpResponse(json.dumps(result), content_type='application/json')
+		
+
+def restaurantList(request):
+	return render(request, 'Main/restaurantList.html')
+
+
+
+@csrf_protect
+def loadRestaurantList(request):
+	try:
+		checked_category = request.POST.get('category')
+		print(checked_category)
+		restaurants = Restaurants.objects.filter(Category_id=int(checked_category)).values('Name')
+		print(restaurants)
+
+		result = \
+		[
+			{
+				"state":"0",
+			}
+		]
+
+		result.extend(restaurants)
+
+		print(result)
+
+		return HttpResponse(json.dumps(result), content_type='application/json')
+	except Exception,e:
+		result = \
+		[
+			{
+				"state":"1"
+			}
+		]
+
+		return HttpResponse(json.dumps(result), content_type='application/json')
