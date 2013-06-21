@@ -1,7 +1,8 @@
 $(document).ready(function() {
 	//상세검색버튼 클릭시
 	$('#AdvancedSearchStartButton').click(function() { 
-		window.location.replace('advancedSearch');
+		//window.location.redirect('advancedSearch');
+		window.location.href= 'advancedSearch';
 	});
 
 	function showSearchResult(data) {
