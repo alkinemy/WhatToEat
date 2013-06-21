@@ -207,9 +207,18 @@ def advancedFoodSearch(request):
 def loadRegisterRestaurant(request):
 	return render(request, 'Main/registerRestaurant.html')
 
+def restaurantDetail(request, restaurant_pk):
+	restaurant = Restaurants.objects.get(pk=restaurant_pk)
+	food_list = Foods.objects.filter(Restaurant=restaurant_pk)
+	print(restaurant)
+	print(food_list)
+	return render(request, 'Main/restaurantDetail.html', {'restaurant':restaurant, 'food_list':food_list})
+
+
+
 
 @csrf_protect
-def registerRestaurant(request):
+def registerNewRestaurant(request):
 	try:
 		restaurant_name = request.POST.get('restaurant_name')
 		restaurant_phone = request.POST.get('restaurant_phone')
@@ -265,9 +274,7 @@ def restaurantList(request):
 def loadRestaurantList(request):
 	try:
 		checked_category = request.POST.get('category')
-		print(checked_category)
-		restaurants = Restaurants.objects.filter(Category_id=int(checked_category)).values('Name')
-		print(restaurants)
+		restaurants = Restaurants.objects.filter(Category_id=int(checked_category)).values('Name', 'pk')
 
 		result = \
 		[
@@ -277,8 +284,6 @@ def loadRestaurantList(request):
 		]
 
 		result.extend(restaurants)
-
-		print(result)
 
 		return HttpResponse(json.dumps(result), content_type='application/json')
 	except Exception,e:

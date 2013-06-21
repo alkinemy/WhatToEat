@@ -4,6 +4,12 @@
 밥 뭐 먹지? - 음식점 리스트
 {% endblock %}
 
+{% block script %}
+<script type="text/javascript">
+	var url = "{% url 'restaurantDetail' 0%}";
+</script>
+{% endblock %}
+
 {% block contentTitle %}
 <h1>밥 뭐 먹지? - 음식점 리스트</h1>
 {% endblock %}
@@ -12,15 +18,19 @@
 <section>
 	<form id="loadRestaurantListForm" name="load_restaurant_list" action="">
 	{% csrf_token %}
-		<input id="radioHansik" class="radioCategory" type="radio" name="category" value="1" /><label for="radioHansik">한식</label>
-		<input id="radioBunsik" class="radioCategory" type="radio" name="category" value="2" /><label for="radioBunsik">분식</label>
-		<input id="radioPizza" class="radioCategory" type="radio" name="category" value="3" /><label for="radioPizza">피자</label>
-		<input id="radioChicken" class="radioCategory" type="radio" name="category" value="4" /><label for="radioChicken">치킨</label>
-		<input id="radioIlsik" class="radioCategory" type="radio" name="category" value="5" /><label for="radioIlsik">일식</label>
-		<input id="radioNaengmyon" class="radioCategory" type="radio" name="category" value="6" /><label for="radioNaengmyon">냉면</label>
-		<input id="radioDosirak" class="radioCategory" type="radio" name="category" value="7" /><label for="radioDosirak">도시락</label>
-		<input id="radioEtc" class="radioCategory" type="radio" name="category" value="8" /><label for="radioEtc">기타</label>
+		<fieldset>
+			<legend>분류</legend>
+			<input id="radioHansik" class="radioCategory" type="radio" name="category" value="1" /><label for="radioHansik">한식</label>
+			<input id="radioBunsik" class="radioCategory" type="radio" name="category" value="2" /><label for="radioBunsik">분식</label>
+			<input id="radioPizza" class="radioCategory" type="radio" name="category" value="3" /><label for="radioPizza">피자</label>
+			<input id="radioChicken" class="radioCategory" type="radio" name="category" value="4" /><label for="radioChicken">치킨</label>
+			<input id="radioIlsik" class="radioCategory" type="radio" name="category" value="5" /><label for="radioIlsik">일식</label>
+			<input id="radioNaengmyon" class="radioCategory" type="radio" name="category" value="6" /><label for="radioNaengmyon">냉면</label>
+			<input id="radioDosirak" class="radioCategory" type="radio" name="category" value="7" /><label for="radioDosirak">도시락</label>
+			<input id="radioEtc" class="radioCategory" type="radio" name="category" value="8" /><label for="radioEtc">기타</label>
+		</fieldset>
 	</form>
+	<h4>찾는 음식점이 없으시다구요? <a href="{% url 'registerRestaurant' %}">여기</a>에서 음식점을 등록하세요!</h4>
 </section>
 <section id="showList">
 </section>
