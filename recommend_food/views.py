@@ -55,7 +55,6 @@ def search(request):
 
 			category = Categories.objects.get(pk=category_pk)
 			region = restaurant.Region
-			print(type(category))
 
 			#가능하면 같은 칸에 넣지 말고 다른 칸에 넣자
 			result = \
@@ -112,7 +111,6 @@ def advancedRestaurantSearch(request):
 		elif checked_regions:
 			restaurant = Restaurants.objects.filter(Region_id__in=checked_regions).values()
 
-		print(restaurant)
 		result = \
 		[
 			{
@@ -147,8 +145,6 @@ def advancedFoodSearch(request):
 	return HttpResponse(json.dumps(result), content_type='application/json')
 	
 
-#상세 검색을 짤 때 가격대도 같이 고려할 수 있도록 하자
-#잡길 서비스 거부(?)
 def loadRegisterRestaurant(request):
 	return render(request, 'Main/registerRestaurant.html')
 

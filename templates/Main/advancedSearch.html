@@ -6,7 +6,7 @@
 
 {% block content %}
 <div>
-	<form id="advancedRestaurantSearcher" name="advanced_sercher" action="">
+	<form id="advancedFoodSearcher" name="advanced_sercher" action="">
 	{% csrf_token %}
 		<table border=1>
 			<tr>
@@ -39,14 +39,18 @@
 				</td>
 			<tr>
 				<td>음식점</td>
-				<td colspan=2>
+				<td>
+					<input id="selectRestaurantAll" type="radio" /><label for="selectRestaurantAll">전체선택</label><br />
+					<input id="cancelRestaurantAll" type="radio" /><label for="cancelRestaurantAll">전체해제</label>
+				</td>
+				<td>
 					<div id="restaurantSearchResult">
 					</div>
 				</td>
 			</tr>
 			<tr>
 				<td colspan=3>
-					<input id="FindRestaurants" type="submit" name="find_restaurant" value="밥 뭐먹지?">
+					<input id="startAdvancedSearch" type="submit" name="find_restaurant" value="밥 뭐먹지?">
 				</td>
 			</tr>
 		</table>

@@ -42,7 +42,7 @@ $(document).ready(function() {
 
 	function getRestaurantList()
 	{
-		data = $('#advancedRestaurantSearcher').serialize();
+		data = $('#advancedFoodSearcher').serialize();
 	
 		$.ajax({
 			type:'POST',
@@ -51,20 +51,15 @@ $(document).ready(function() {
 			dataType: "json",
 			success: function(data) {
 				state = data[0].state
+				$("#restaurantSearchResult").empty();
 				restaurants = data[1]
-				alert(restaurants[0].Name);
-				for (var restaurant in restaurants) {
-					alert(restaurant);
-					id = "checkboxRestaurant" + restaurant.Name
-					$("#restaurantSearchResult").append('<input id="')
-												.append(id)
-					   							.append('" type="checkbox" name="restaurant" value="')
-												.append(restaurant.id)
-												.append('" /><label for="')
-												.append(id)
-												.append('">')
-												.append(restaurant.Name)
-												.append('</label>');
+				for (var i = 0; i != restaurants.length; i++) {
+					restaurant = restaurants[i];
+					id = "checkboxRestaurant" + restaurant.id;
+					string = '<input id="' + id + '" type="checkbox" name="restaurant" value="' 
+							+ restaurant.id + '" /><label for="' + id + '">' 
+							+ restaurant.Name + '</label>';
+					$("#restaurantSearchResult").append(string);
 				}
 			},
 			error: function(xhr,err) {
@@ -95,6 +90,10 @@ $(document).ready(function() {
 		getRestaurantList();
 	});
 
+	$('input[name=region]').click(function(t) {
+		getRestaurantList();
+	});
+
 	$('#selectCategoryAll').click(function() {
 		$('#cancelCategoryAll').prop('checked', false);
 		$('input[name=category]').prop('checked', true);
@@ -117,5 +116,15 @@ $(document).ready(function() {
 		$('#selectRegionAll').prop('checked', false);
 		$('input[name=region]').prop('checked', false);
 		getRestaurantList();
+	});
+	
+	$('#selectRestaurantAll').click(function() {
+		$('#cancelRestaurantAll').prop('checked', false);
+		$('input[name=restaurant]').prop('checked', true);
+	});
+
+	$('#cancelRestaurantAll').click(function() {
+		$('#selectRestaurantAll').prop('checked', false);
+		$('input[name=restaurant]').prop('checked', false);
 	});
 });
