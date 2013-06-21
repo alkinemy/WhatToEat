@@ -7,6 +7,8 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_protect
 from django.template import loader
 from django.db.models import Q
+#from django.utils import simplejson
+#from django.core.serializers.json import DjangoJSONEncoder
 from recommend_food.models import Categories, Regions, Restaurants, Foods
 
 
@@ -53,7 +55,9 @@ def search(request):
 
 			category = Categories.objects.get(pk=category_pk)
 			region = restaurant.Region
+			print(type(category))
 
+			#가능하면 같은 칸에 넣지 말고 다른 칸에 넣자
 			result = \
 			[
 				{
@@ -95,18 +99,28 @@ def loadAdvancedSearch(request):
 
 #조건에 맞는 음식점을 전부 출력함
 @csrf_protect
-def restaurantSearch(request):
+def advancedRestaurantSearch(request):
 	checked_categories = request.POST.getlist('category')
 	checked_regions = request.POST.getlist('region')
 
 	try:
-		restaurant = Restaurant.objects.filter(Q(Category_id__in=checked_categories) | Q(Region_id__in=checked_regions))
+		restaurant = []
+		if checked_categories and checked_regions:
+			restaurant = Restaurants.objects.filter(Q(Category_id__in=checked_categories), Q(Region_id__in=checked_regions)).values()
+		elif checked_categories:
+			restaurant = Restaurants.objects.filter(Category_id__in=checked_categories).values()
+		elif checked_regions:
+			restaurant = Restaurants.objects.filter(Region_id__in=checked_regions).values()
+
+		print(restaurant)
 		result = \
 		[
 			{
 				"state":"3"
 			}
 		]
+		result.append(list(restaurant))
+		#너무 쓸데없는 데이터가 많이 감 나중에 고쳐보기
 	
 		return HttpResponse(json.dumps(result), content_type='application/json')
 
@@ -122,8 +136,15 @@ def restaurantSearch(request):
 		return HttpResponse(json.dumps(result), content_type='application/json')
 
 
-
-
+@csrf_protect
+def advancedFoodSearch(request):
+	result = \
+	[
+		{
+			"state":"0"
+		}
+	]
+	return HttpResponse(json.dumps(result), content_type='application/json')
 	
 
 #상세 검색을 짤 때 가격대도 같이 고려할 수 있도록 하자

@@ -37,26 +37,84 @@ $(document).ready(function() {
 				//alert("responseText: "+xhr.responseText);
 			}
 		});
-		event.preventDefault();
 	});
 
-	/*$('#advancedRestaurantSearcher').submit(function() {
-		alert("아직 안짬");
-		data = $('#FindRestaurant').serialize();
-
+	function getRestaurantList()
+	{
+		data = $('#advancedRestaurantSearcher').serialize();
+	
 		$.ajax({
 			type:'POST',
-			url:'/restaurantSearch/',
+			url:'advancedRestaurantSearch/',
 			data: data,
 			dataType: "json",
 			success: function(data) {
-				alert("123");
+				state = data[0].state
+				restaurants = data[1]
+				alert(restaurants[0].Name);
+				for (var restaurant in restaurants) {
+					alert(restaurant);
+					id = "checkboxRestaurant" + restaurant.Name
+					$("#restaurantSearchResult").append('<input id="')
+												.append(id)
+					   							.append('" type="checkbox" name="restaurant" value="')
+												.append(restaurant.id)
+												.append('" /><label for="')
+												.append(id)
+												.append('">')
+												.append(restaurant.Name)
+												.append('</label>')
+				}
 			},
 			error: function(xhr,err) {
 				alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
-				//alert("responseText: "+xhr.responseText);
 			}
 		});
-		event.preventDefault();
-	});*/
+	}
+	
+	$('#advancedFoodSearcher').submit(function() {
+		data = $('#advancedFoodSearcher').serialize();
+
+		$.ajax({
+			type:'POST',
+			url:'advancedFoodSearch/',
+			data: data,
+			dataType: "json",
+			success: function(data) {
+				//추가해넣기
+				//음식 결과를 채워넣으면 됨
+			},
+			error: function(xhr,err) {
+				alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
+			}
+		});
+	});
+
+	$('input[name=category]').click(function(t) {
+		getRestaurantList();
+	});
+
+	$('#selectCategoryAll').click(function() {
+		$('#cancelCategoryAll').prop('checked', false);
+		$('input[name=category]').prop('checked', true);
+		getRestaurantList();
+	});
+
+	$('#cancelCategoryAll').click(function() {
+		$('#selectCategoryAll').prop('checked', false);
+		$('input[name=category]').prop('checked', false);
+		getRestaurantList();
+	});
+
+	$('#selectRegionAll').click(function() {
+		$('#cancelRegionAll').prop('checked', false);
+		$('input[name=region]').prop('checked', true);
+		getRestaurantList();
+	});
+
+	$('#cancelRegionAll').click(function() {
+		$('#selectRegionAll').prop('checked', false);
+		$('input[name=region]').prop('checked', false);
+		getRestaurantList();
+	});
 });

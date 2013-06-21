@@ -7,12 +7,13 @@
 {% block content %}
 <div>
 	<form id="advancedRestaurantSearcher" name="advanced_sercher" action="">
+	{% csrf_token %}
 		<table border=1>
 			<tr>
 				<td>분류</td>
 				<td>
-					전체선택<br />
-					전체해제
+					<input id="selectCategoryAll" type="radio" /><label for="selectCategoryAll">전체선택</label><br />
+					<input id="cancelCategoryAll" type="radio" /><label for="cancelCategoryAll">전체해제</label>
 				</td>
 				<td>
 					<input id="checkboxHansik" type="checkbox" name="category" value="1" /><label for="checkboxHansik">한식</label>
@@ -27,8 +28,8 @@
 			</tr>
 				<td>지역</td>
 				<td>
-					전체선택<br />
-					전체해제
+					<input id="selectRegionAll" type="radio" /><label for="selectRegionAll">전체선택</label><br />
+					<input id="cancelRegionAll" type="radio" /><label for="cancelRegionAll">전체해제</label>
 				</td>
 				<td>
 					<input id="checkboxNokdu" type="checkbox" name="region" value="1" /><label for="checkboxNokdu">녹두</label>
@@ -37,15 +38,18 @@
 					<input id="checkboxRegionEtc" type="checkbox" name="region" value="4" /><label for="checkboxRegionEtc">기타</label>
 				</td>
 			<tr>
+				<td>음식점</td>
+				<td colspan=2>
+					<div id="restaurantSearchResult">
+					</div>
+				</td>
+			</tr>
+			<tr>
 				<td colspan=3>
-					<input id="FindRestaurants" type="submit" name="find_restaurant" value="음식점 찾기!">
+					<input id="FindRestaurants" type="submit" name="find_restaurant" value="밥 뭐먹지?">
 				</td>
 			</tr>
 		</table>
 	</form>
-</div>
-
-<div id="RestaurantResult">
-
 </div>
 {% endblock %}
