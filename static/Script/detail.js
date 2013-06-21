@@ -6,4 +6,8 @@ $(document).ready(function() {
 	$("#returnRestaurantList").click(function() {
 		window.location.href = '/restaurantList';
 	});
+
+	$("#modifyRestaurantFoodListButton").click(function() {
+		window.location.href = modifyRestaurantFoodListUrl;
+	});
 });

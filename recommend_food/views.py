@@ -216,6 +216,84 @@ def restaurantDetail(request, restaurant_pk):
 def loadModifyRestaurant(request, restaurant_pk):
 	restaurant = Restaurants.objects.get(pk=restaurant_pk)
 	return render(request, 'Main/modifyRestaurant.html', {'restaurant':restaurant})
+
+def loadModifyRestaurantFoodList(request, restaurant_pk):
+	restaurant = Restaurants.objects.get(pk=restaurant_pk)
+	food_list = Foods.objects.filter(Restaurant=restaurant_pk)
+	return render(request, 'Main/modifyRestaurantFoodList.html', {'restaurant':restaurant, 'food_list':food_list})
+
+def addNewFood(request, restaurant_pk):
+	try:
+		restaurant = Restaurants.objects.get(pk=restaurant_pk)
+		
+		food_name = request.POST.get('food_name')
+		food_price = request.POST.get('food_price')
+		food_detail = request.POST.get('food_detail')
+
+		food = Foods(Name=food_name, Price=food_price, Restaurant=restaurant, Detail=food_detail)
+		food.save()	
+
+		result = \
+		[
+			{
+				"state":"0",
+				"food_pk":food.pk,
+				"food_name":food.Name,
+				"food_price":food.Price,
+				"food_detail":food.Detail
+			}
+		]
+
+		return HttpResponse(json.dumps(result), content_type='application/json')
+
+
+	except Exception,e:
+		result = \
+		[
+			{
+				"state":"1"
+			}
+		]
+
+		print(e)
+		return HttpResponse(json.dumps(result), content_type='application/json')
+	
+
+def modifyFoodDetail(request, restaurant_pk):
+	try:
+		food_pk = request.POST.get('food_pk')
+		food_name = request.POST.get('food_name')
+		food_price = request.POST.get('food_price')
+		food_detail = request.POST.get('food_detail')
+
+		restaurant = Restaurants.objects.get(pk=restaurant_pk)
+		food = Foods.objects.get(pk=food_pk)
+		food.Name = food_name
+		food.Price = food_price
+		food.Detail = food_detail
+
+		food.save()
+
+		result = \
+		[
+			{
+				"state":"0",
+			}
+		]
+
+		return HttpResponse(json.dumps(result), content_type='application/json')
+
+
+	except Exception,e:
+		result = \
+		[
+			{
+				"state":"1"
+			}
+		]
+
+		print(e)
+		return HttpResponse(json.dumps(result), content_type='application/json')
 	
 
 def modifyOldRestaurant(request, restaurant_pk):

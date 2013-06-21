@@ -14,8 +14,12 @@ urlpatterns = patterns('',
 	url(r'^registerRestaurant/$', views.loadRegisterRestaurant, name='registerRestaurant'),
 	url(r'^registerRestaurant/registerNewRestaurant/$', views.registerNewRestaurant, name='registerNewRestaurant'),
 
-	url(r'modifyRestaurant/(\d+)/$', views.loadModifyRestaurant, name='modifyRestaurant'),
-	url(r'modifyRestaurant/modifyOldRestaurant/(\d+)/$', views.modifyOldRestaurant, name='modifyOldRestaurant'),
+	url(r'modifyRestaurantDetail/(\d+)/$', views.loadModifyRestaurant, name='modifyRestaurant'),
+	url(r'modifyRestaurantDetail/modifyOldRestaurant/(\d+)/$', views.modifyOldRestaurant, name='modifyOldRestaurant'),
+
+	url(r'modifyRestaurantFoodList/(\d+)/$', views.loadModifyRestaurantFoodList, name='modifyRestaurantFoodList'),
+	url(r'modifyRestaurantFoodList/modifyFoodDetail/(\d+)/$', views.modifyFoodDetail, name='modifyFoodDetail'),
+	url(r'modifyRestaurantFoodList/addNewFood/(\d+)$', views.addNewFood, name='addNewFood'),
 	
 	url(r'^restaurantList/$', views.restaurantList, name='restaurantList'),
 	url(r'^restaurantList/loadRestaurantList/$', views.loadRestaurantList, name='loadRestaurantList'),

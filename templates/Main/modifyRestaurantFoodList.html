@@ -1,0 +1,96 @@
+{% extends "Layout/base_restaurant.html" %}
+
+{% block contentTitle %}
+<h1>밥 뭐 먹지? - 음식 리스트 수정</h1>
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript" src="{{STATIC_URL}}Script/modify.js"></script>
+<script type="text/javascript">
+	var modifyFoodDetailUrl = "{% url 'modifyFoodDetail' restaurant.pk %}";
+	var returnRestaurantDetailUrl = "{% url 'restaurantDetail' restaurant.pk %}";
+	var addNewFoodUrl = "{%url 'addNewFood' restaurant.pk %}";
+</script>
+{% endblock %}
+
+{% block content %}
+<button id="returnRestaurantDetailButton" type="button">수정 끝내기</button>
+<table id="restaurantTable" border=1>
+	<tbody id="restaurantDetail">
+		<tr>
+			<td colspan=7>
+				<h4>{{ restaurant.Name }}</h4>
+			</td>
+		<tr>
+	</tbody>
+	<tbody id='addFood'>
+		<form id="addNewFoodForm" name="add_food" action="">
+		{% csrf_token %}
+			<tr>
+				<td colspan=7>
+					음식 추가
+				</td>
+			</td>
+			<tr>
+				<td>
+					이름
+				</td>
+				<td>
+					<input id="textboxAddFoodName" name="food_name" type="textbox" />
+				</td>
+				<td>
+					가격
+				</td>
+				<td>
+					<input id="textboxAddFoodPrice" name="food_price" type="textbox" />
+				</td>
+				<td>
+					특이사항
+				</td>
+				<td>
+					<input id="textboxAddFoodDetail" name="food_detail" type="textbox" />
+				</td>
+				<td>
+					<input id="addfoodSubmit" type="submit" value="음식 추가하기" />
+				</td>
+			</tr>
+		</form>
+	</tbody>
+	<tbody id="modifyFood">
+		<tr>
+			<td colspan=7>
+				음식 정보
+			</td>
+		</tr>
+		{% for food in food_list %}
+		<form class="modifyFoodForm" name="modify_food" action="">
+		{% csrf_token %}
+			<input class="food_pk" type="hidden" name="food_pk" value="{{ food.pk }}" />
+			<tr>
+				<td>
+					이름
+				</td>
+				<td>
+					<input class="textboxFoodName" type="textbox" name="food_name" value="{{ food.Name }}" />
+				</td>
+				<td>
+					가격
+				</td>
+				<td>
+					<input class="textboxFoodPrice" type="textbox" name="food_price" value="{{ food.Price }}" />
+				</td>
+				<td>
+					특이사항
+				</td>
+				<td>
+					<input class="textboxFoodDetail" type="textbox" name="food_detail" value="{{ food.Detail }}" />
+				</td>
+				<td>
+					<input class="modifyFoodForm" type="submit" name="modify_food_submit" value="수정 적용" />
+				</td>
+			</tr>
+		</form>
+		{% endfor %}
+	</tbody>
+</table>
+{% endblock %}

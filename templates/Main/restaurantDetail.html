@@ -8,6 +8,7 @@
 <script type="text/javascript" src="{{STATIC_URL}}Script/detail.js"></script>
 <script type="text/javascript">
 	var modifyRestaurantUrl = "{% url 'modifyRestaurant' restaurant.pk %}";
+	var modifyRestaurantFoodListUrl = "{% url 'modifyRestaurantFoodList' restaurant.pk %}";
 </script>
 {% endblock %}
 
@@ -66,7 +67,7 @@
 		<tr>
 			<td colspan=7>
 				음식 정보
-				<button id="addFoodButton" type="button" onclick="{% url 'modifyRestaurant' restaurant.pk %}">음식 정보 수정하기</button>
+				<button id="modifyRestaurantFoodListButton" type="button">음식 정보 수정하기</button>
 			</td>
 		</tr>
 		{% for food in food_list %}
