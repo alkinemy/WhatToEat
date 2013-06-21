@@ -8,6 +8,7 @@
 <form id= "FoodSearcher" name="food_searcher" action="">
 	{% csrf_token %}
 	<fieldset>
+		<legend>분류</legend>
 		<input id="checkboxHansik" type="checkbox" name="category" value="1" checked /><label for="checkboxHansik">한식</label>
 		<input id="checkboxBunsik" type="checkbox" name="category" value="2" checked /><label for="checkboxBunsik">분식</label>
 		<input id="checkboxPizza" type="checkbox" name="category" value="3" checked /><label for="checkboxPizza">피자</label>
@@ -17,6 +18,12 @@
 		<input id="checkboxDosirak" type="checkbox" name="category" value="7" checked /><label for="checkboxDosirak">도시락</label>
 		<input id="checkboxEtc" type="checkbox" name="category" value="8" checked /><label for="checkboxEtc">기타</label>
 	</fieldset>
+	<fieldset>
+		<legend>가격</legend>
+		<input id="textboxPriceLowerBound" type="text" name="priceLowerBound" value="0" />
+		~
+		<input id="textboxPriceUpperBound" type="text" name="priceUpperBound" value="10000" />
+		</fieldset>
 	<br /><br />
 	<input type="submit" name="search" value="음식점 찾기!" />
 	<button id="AdvancedSearchStartButton" type="button">상세 검색</button>

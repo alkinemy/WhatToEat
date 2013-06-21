@@ -30,25 +30,26 @@ def search(request):
 	#배달주문할 때는 지역이 중요하지 않기 때문에 지역은 일단 빼기로 함
 	try:
 		checked_categories = request.POST.getlist('category')
+		priceLowerBound = request.POST.get('priceLowerBound')
+		priceUpperBound = request.POST.get('priceUpperBound')
 
 		while checked_categories:
 			category_pk = random.choice(checked_categories)
 			restaurant_list = Restaurants.objects.filter(Category=category_pk)
 
-			if not restaurant_list:
-				checked_categories.remove(category_pk)
-				continue
-
 			while restaurant_list:
 				restaurant = random.choice(restaurant_list)
-				food_list = Foods.objects.filter(Restaurant=restaurant.pk)
+				food_list = Foods.objects.filter(Q(Restaurant=restaurant.pk), Q(Price__gt=int(priceLowerBound)), Q(Price__lt=int(priceUpperBound)))
 
 				if not food_list:
-					restaurant_list.remove(restaurant)
+					restaurant_list = restaurant_list.exclude(pk=restaurant.pk)
 					continue
 
 				food = random.choice(food_list)
 				break;
+			else:
+				checked_categories.remove(category_pk)
+				continue
 
 			category = Categories.objects.get(pk=category_pk)
 			region = restaurant.Region
@@ -75,6 +76,7 @@ def search(request):
 					"state":"1"
 				}
 			]
+
 			return HttpResponse(json.dumps(result), content_type='application/json')
 				
 	except Exception,e:
