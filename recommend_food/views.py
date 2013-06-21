@@ -136,14 +136,73 @@ def advancedRestaurantSearch(request):
 
 @csrf_protect
 def advancedFoodSearch(request):
-	result = \
-	[
-		{
-			"state":"0"
-		}
-	]
-	return HttpResponse(json.dumps(result), content_type='application/json')
+	try:
+		checked_categories = request.POST.getlist('category')
+		checked_regions = request.POST.getlist('region')
+		checked_restaurants = request.POST.getlist('restaurant')
+		priceLowerBound = request.POST.get('priceLowerBound')
+		priceUpperBound = request.POST.get('priceUpperBound')
+
+		restaurant_list = []
+		if checked_restaurants:
+			restaurant_list = Restaurants.objects.filter(Q(id__in=checked_restaurants))
+		elif checked_categories and checked_regions:
+			restaurant_list = Restaurants.objects.filter(Q(Category_id__in=checked_categories), Q(Region_id__in=checked_regions))
+		elif checked_categories:
+			restaurant_list = Restaurants.objects.filter(Q(Category_id__in=checked_categories))
+		elif checked_regions:
+			restaurant_list = Restaurants.objects.filter(Q(Region_id__in=checked_regions))
+		
+		while restaurant_list:
+			restaurant = random.choice(restaurant_list)
+			food_list = Foods.objects.filter(Q(Restaurant=restaurant.pk), Q(Price__gt=int(priceLowerBound)), Q(Price__lt=int(priceUpperBound)))
+
+			if not food_list:
+				restaurant_list = restaurant_list.exclude(pk=restaurant.pk)
+				continue
+
+			food = random.choice(food_list)
+
+			region = restaurant.Region
+			category = Categories.objects.get(pk=restaurant.Category.pk)
+
+			#가능하면 같은 칸에 넣지 말고 다른 칸에 넣자
+			result = \
+			[
+				{
+					"state":"3", 
+					"category_name":category.Name, 
+					"region_name":region.Name, 
+					"restaurant_name":restaurant.Name, 
+					"restaurant_phonenumber":restaurant.PhoneNumber,
+					"food_name":food.Name, 
+					"food_price":food.Price
+				}
+			]
 	
+			return HttpResponse(json.dumps(result), content_type='application/json')
+
+		else:
+			result = \
+			[
+				{
+					"state":"1"
+				}
+			]
+
+			return HttpResponse(json.dumps(result), content_type='application/json')
+				
+	except Exception,e:
+		result = \
+		[
+			{
+				"state":"2"
+			}
+		]
+
+		print(e)
+		return HttpResponse(json.dumps(result), content_type='application/json')
+
 
 def loadRegisterRestaurant(request):
 	return render(request, 'Main/registerRestaurant.html')
