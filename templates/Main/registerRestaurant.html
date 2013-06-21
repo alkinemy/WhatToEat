@@ -1,11 +1,14 @@
 {% extends "Layout/base_restaurant.html" %}
 
 {% block contentTitle %}
-<h1>밥 뭐 먹지? - 음식점 등록/수정</h1>
+<h1>밥 뭐 먹지? - 음식점 등록</h1>
 {% endblock %}
 
 {% block script %}
 <script type="text/javascript" src="{{STATIC_URL}}Script/register.js"></script>
+<script type="text/javascript">
+	var url = "{% url 'restaurantDetail' 0 %}";
+</script>
 {% endblock %}
 
 {% block content %}
@@ -71,40 +74,6 @@
 			<tr>
 				<td colspan=7>
 					<input id="registerRestaurantSubmit" type="submit" value="음식점 등록" />
-				</td>
-			</tr>
-		</form>
-	</tbody>
-	<tbody id='foodTextbox'>
-		<form id="registerFoodForm" name="register_food" action="">
-		{% csrf_token %}
-			<tr>
-				<td colspan=7>
-					음식 정보 
-					<button id="addFoodButton" type="button">음식 입력칸 추가</button>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					이름
-				</td>
-				<td>
-					<input type="textbox" name="food_name" />			
-				</td>
-				<td>
-					가격
-				</td>
-				<td>
-					<input type="textbox" name="food_price" />
-				</td>
-				<td>
-					특이사항
-				</td>
-				<td>
-					<input type="textbox" name="food_detail" />
-				</td>
-				<td>
-					<input type="submit" id="registerFoodSubmit" value="등록" />
 				</td>
 			</tr>
 		</form>

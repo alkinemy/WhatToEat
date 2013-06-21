@@ -4,91 +4,93 @@
 <h1>밥 뭐 먹지? - 음식점 정보</h1>
 {% endblock %}
 
+{% block script %}
+<script type="text/javascript" src="{{STATIC_URL}}Script/detail.js"></script>
+<script type="text/javascript">
+	var modifyRestaurantUrl = "{% url 'modifyRestaurant' restaurant.pk %}";
+</script>
+{% endblock %}
+
 {% block content %}
+<button id="returnRestaurantList" type="button">음식점 리스트로 돌아가기</button>
 <table id="restaurantTable" border=1>
 	<tbody>
-		<form id="registerRestaurantForm" name="register_restaurant" action="">
-		{% csrf_token %}
-			<tr>
-				<td colspan=7>
-					음식점 정보
-					<input id="modifyRestaurantSubmit" type="submit" value="수정하기" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					음식점 이름
-				</td>
-				<td colspan=6>
-					{{ restaurant.Name }}
-				</td>
-			</tr>
-			<tr>
-				<td>
-					전화번호
-				</td>
-				<td colspan=6>
-					{{ restaurant.PhoneNumber }}
-				</td>
-			</tr>
-			<tr>
-				<td>
-					분류		
-				</td>
-				<td colspan=6>
-					{{ restaurant.Category.Name }}
-				</td>
-			</tr>
-			<tr>
-				<td>
-					지역		
-				</td>
-				<td colspan=6>
-					{{ restaurant.Region.Name }}
-				</td>
-			</tr>
-			<tr>
-				<td>
-					음식점 특이사항
-				</td>
-				<td colspan=6>
-					{{ restaurant.Detail }}
-				</td>
-			</tr>
-		</form>
+		<tr>
+			<td colspan=7>
+				음식점 정보
+				<button id="modifyRestaurantButton" type="button">수정하기</button>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				음식점 이름
+			</td>
+			<td colspan=6>
+				{{ restaurant.Name }}
+			</td>
+		</tr>
+		<tr>
+			<td>
+				전화번호
+			</td>
+			<td colspan=6>
+				{{ restaurant.PhoneNumber }}
+			</td>
+		</tr>
+		<tr>
+			<td>
+				분류		
+			</td>
+			<td colspan=6>
+				{{ restaurant.Category.Name }}
+			</td>
+		</tr>
+		<tr>
+			<td>
+				지역		
+			</td>
+			<td colspan=6>
+				{{ restaurant.Region.Name }}
+			</td>
+		</tr>
+		<tr>
+			<td>
+				음식점 특이사항
+			</td>
+			<td colspan=6>
+				{{ restaurant.Detail }}
+			</td>
+		</tr>
 	</tbody>
 	<tbody id='foodTextbox'>
-		<form id="registerFoodForm" name="register_food" action="">
-		{% csrf_token %}
-			<tr>
-				<td colspan=7>
-					음식 정보
-					<button id="addFoodButton" type="button">음식 추가하기</button>
-				</td>
-			</tr>
-			{% for food in food_list %}
-			<tr>
-				<td>
-					이름
-				</td>
-				<td>
-					{{ food.Name }}
-				</td>
-				<td>
-					가격
-				</td>
-				<td>
-					{{ food.Price }}
-				</td>
-				<td>
-					특이사항
-				</td>
-				<td colspan=2>
-					{{ food.Detail }}
-				</td>
-			</tr>
-			{% endfor %}
-		</form>
+		<tr>
+			<td colspan=7>
+				음식 정보
+				<button id="addFoodButton" type="button" onclick="{% url 'modifyRestaurant' restaurant.pk %}">음식 정보 수정하기</button>
+			</td>
+		</tr>
+		{% for food in food_list %}
+		<tr>
+			<td>
+				이름
+			</td>
+			<td>
+				{{ food.Name }}
+			</td>
+			<td>
+				가격
+			</td>
+			<td>
+				{{ food.Price }}
+			</td>
+			<td>
+				특이사항
+			</td>
+			<td colspan=2>
+				{{ food.Detail }}
+			</td>
+		</tr>
+		{% endfor %}
 	</tbody>
 </table>
 {% endblock %}

@@ -22,7 +22,9 @@ $(document).ready(function() {
 				state = data[0].state;
 				if (state == 0) {
 					alert("음식점 등록 성공!");
-					$('#registerRestaurantForm')[0].reset();
+					//테스트해보기
+					var restaurantDetailUrl = url.replace(0, data[0].restaurant_pk);
+					window.location.replace(restaurantDetailUrl);
 				}
 				else {
 					alert("음식점 등록 실패");

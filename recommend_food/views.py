@@ -210,11 +210,56 @@ def loadRegisterRestaurant(request):
 def restaurantDetail(request, restaurant_pk):
 	restaurant = Restaurants.objects.get(pk=restaurant_pk)
 	food_list = Foods.objects.filter(Restaurant=restaurant_pk)
-	print(restaurant)
-	print(food_list)
 	return render(request, 'Main/restaurantDetail.html', {'restaurant':restaurant, 'food_list':food_list})
 
 
+def loadModifyRestaurant(request, restaurant_pk):
+	restaurant = Restaurants.objects.get(pk=restaurant_pk)
+	return render(request, 'Main/modifyRestaurant.html', {'restaurant':restaurant})
+	
+
+def modifyOldRestaurant(request, restaurant_pk):
+	try:
+		restaurant = Restaurants.objects.get(pk=restaurant_pk)
+
+		restaurant_name = request.POST.get('restaurant_name')
+		restaurant_phone = request.POST.get('restaurant_phone')
+		restaurant_detail = request.POST.get('restaurant_detail')
+		checked_category = request.POST.get('category')
+		checked_region = request.POST.get('region')
+
+		category_object = Categories.objects.get(pk=int(checked_category))
+		region_object = Regions.objects.get(pk=int(checked_region))
+
+		restaurant.Name = restaurant_name
+		restaurant.PhoneNumber = restaurant_phone
+		restaurant.Detail = restaurant_detail
+		restaurant.Category = category_object
+		restaurant.Region = region_object
+
+		restaurant.save()
+
+		result = \
+		[
+			{
+				"state":"0",
+				"restaurant_pk":restaurant.pk
+			}
+		]
+
+		return HttpResponse(json.dumps(result), content_type='application/json')
+
+
+	except Exception,e:
+		result = \
+		[
+			{
+				"state":"1"
+			}
+		]
+
+		print(e)
+		return HttpResponse(json.dumps(result), content_type='application/json')
 
 
 @csrf_protect
@@ -226,10 +271,6 @@ def registerNewRestaurant(request):
 		checked_category = request.POST.get('category')
 		checked_region = request.POST.get('region')
 
-		foods_name = request.POST.getlist('food_name')
-		foods_price = request.POST.getlist('food_price')
-		foods_detail = request.POST.getlist('food_detail')
-
 		category_object = Categories.objects.get(pk=int(checked_category))
 		region_object = Regions.objects.get(pk=int(checked_region))
 
@@ -238,15 +279,11 @@ def registerNewRestaurant(request):
 		new_restaurant = Restaurants(Name=restaurant_name, Category=category_object, PhoneNumber=restaurant_phone, Region=region_object, Detail=restaurant_detail)
 		new_restaurant.save()
 
-		for i in range(len(foods_name)):
-			new_food = Foods(Name=foods_name[i], Price=int(foods_price[i]), Restaurant=new_restaurant)
-			new_food.save()
-			
-
 		result = \
 		[
 			{
-				"state":"0"
+				"state":"0",
+				"restaurant_pk":new_restaurant.pk
 			}
 		]
 
