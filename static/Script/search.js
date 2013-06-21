@@ -17,7 +17,7 @@ $(document).ready(function() {
 				state = data[0].state;
 				$("#searchResult").empty();
 				if (state == 0) {
-			$("#searchResult").append("<p>")
+					$("#searchResult").append("<p>")
 									  .append("<h2>굶으세요</h2>")
 									  .append("<h3>운이 참 없네요...<br />꽝입니다.<br />당신은 밥을 먹을 수 없습니다.<br />다이어트 하세요!</h3><br /></p>");
 				}
@@ -37,6 +37,7 @@ $(document).ready(function() {
 				//alert("responseText: "+xhr.responseText);
 			}
 		});
+		event.preventDefault();
 	});
 
 	function getRestaurantList()
@@ -63,7 +64,7 @@ $(document).ready(function() {
 												.append(id)
 												.append('">')
 												.append(restaurant.Name)
-												.append('</label>')
+												.append('</label>');
 				}
 			},
 			error: function(xhr,err) {
