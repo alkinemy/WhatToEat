@@ -223,6 +223,31 @@ def loadModifyRestaurantFoodList(request, restaurant_pk):
 	return render(request, 'Main/modifyRestaurantFoodList.html', {'restaurant':restaurant, 'food_list':food_list})
 
 @csrf_protect
+def deleteRestaurant(request, restaurant_pk):
+	try:
+		restaurant = Restaurants.objects.get(pk=restaurant_pk)
+		restaurant.delete()
+
+		result = \
+		[
+			{
+				"state":"0",
+			}
+		]
+
+		return HttpResponse(json.dumps(result), content_type='application/json')
+	except Exception,e:
+		result = \
+		[
+			{
+				"state":"1"
+			}
+		]
+
+		print(e)
+		return HttpResponse(json.dumps(result), content_type='application/json')
+
+@csrf_protect
 def deleteFood(request, restaurant_pk):
 	try:
 		restaurant = Restaurants.objects.get(pk=restaurant_pk)

@@ -9,6 +9,8 @@
 <script type="text/javascript">
 	var restaurantDetailUrl = "{% url 'restaurantDetail' restaurant.pk %}";
 	var modifyOldRestaurantUrl = "{% url 'modifyOldRestaurant' restaurant.pk %}";
+	var deleteRestaurantUrl = "{% url 'deleteRestaurant' restaurant.pk %}";
+	var restaurantListUrl = "{% url 'restaurantList' %}";
 </script>
 {% endblock %}
 
@@ -20,6 +22,7 @@
 			<tr>
 				<td colspan=7>
 					음식점 정보
+					<button id="deleteRestaurantButton" type="button">음식점 삭제</button>
 				</td>
 			</tr>
 			<tr>

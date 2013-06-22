@@ -6,6 +6,33 @@ $(document).ready(function() {
 		return "페이지를 벗어나려 하고있습니다.";
 	}
 	*/
+	$('#deleteRestaurantButton').click(function() {
+		if (confirm('삭제하시겠습니까?')) {
+			data = $('#modifyRestaurantForm').serialize();
+			
+			$.ajax({
+				type:'POST',
+				url:deleteRestaurantUrl,
+				data: data,
+				dataType: "json",
+				success: function(data) {
+					state = data[0].state;
+					if (state == 0) {
+						alert("음식점 삭제 성공!");
+						window.location.replace(restaurantListUrl);
+						event.preventDefault();
+					}
+					else {
+						alert("음식 삭제 실패");
+					}
+				},
+				error: function(xhr,err) {
+					alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
+				}
+			});
+			event.preventDefault();
+		}
+	});
 
 	$('#modifyRestaurantForm').submit(function() {
 		data = $('#modifyRestaurantForm').serialize();
@@ -101,7 +128,6 @@ $(document).ready(function() {
 		if (confirm('삭제하시겠습니까?')) {
 			form = $(this).parent().parent().find('.modifyFoodForm');
 			data = form.serialize();
-			alert(data);
 			
 			$.ajax({
 				type:'POST',

@@ -16,6 +16,7 @@ urlpatterns = patterns('',
 
 	url(r'modifyRestaurantDetail/(\d+)/$', views.loadModifyRestaurant, name='modifyRestaurant'),
 	url(r'modifyRestaurantDetail/modifyOldRestaurant/(\d+)/$', views.modifyOldRestaurant, name='modifyOldRestaurant'),
+	url(r'modifyRestaurantDetail/deleteRestaurant/(\d+)/$', views.deleteRestaurant, name='deleteRestaurant'),
 
 	url(r'modifyRestaurantFoodList/(\d+)/$', views.loadModifyRestaurantFoodList, name='modifyRestaurantFoodList'),
 	url(r'modifyRestaurantFoodList/modifyFoodDetail/(\d+)/$', views.modifyFoodDetail, name='modifyFoodDetail'),
