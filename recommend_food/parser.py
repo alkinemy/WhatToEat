@@ -2,8 +2,8 @@
 #-*- coding: utf-8 -*-
 
 import sys
-import subprocess
-from models import Categories
+import sqlite3
+
 
 def removeSpace(fh):
 	document = ""
@@ -73,6 +73,38 @@ def main():
 		dinner = splitMenu(dinner)
 	print(dinner)
 	
+	#디비 연결
+	db = sqlite3.connect("../what_to_eat")
+	cursor = db.cursor()
+	cursor.execute("select * from recommend_food_categories where Name='한식'")
+
+	category_pk = 0
+	for row in cursor:
+		category_pk = row[0]
+		
+	cursor.execute("select * from recommend_food_regions where Name='학교'")
+
+	region_pk = 0
+	for row in cursor:
+		region_pk = row[0]
+
+	cursor.execute("delete from recommend_food_restaurants where Name='302동'")
+
+#고쳐야함 ㅡㅡ
+	data = [(1, None), (2, u'302동'), (3, category_pk), (4, u'몰라'), (5, region_pk), (6, None)]
+	query = "insert into recommend_food_restaurants('302동', '"
+	query += str(category_pk)
+	query += "', '몰라', '"
+	query += str(region_pk)
+	query += "')"
+	print(query)
+#cursor.execute(query)
+	cursor.executemany("insert into recommend_food_restaurants values (?, ?, ?, ?, ?, ?)", data)
+
+
+	cursor.close()
+
+
 
 	fh.close()
 

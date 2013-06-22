@@ -1,3 +1,8 @@
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+@import url(http://fonts.googleapis.com/earlyaccess/nanumbrushscript.css);
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothiccoding.css);
+@import url(http://fonts.googleapis.com/earlyaccess/nanummyeongjo.css);
+@import url(http://fonts.googleapis.com/earlyaccess/nanumpenscript.css);
 @font-face {
 	font-family:NanumGothic;
 src: url('../Font/NanumGothic.eot');
@@ -8,6 +13,6 @@ src: url('../Font/NanumGothic.eot?#iefix') format('embeded-opentype'),
 	 font-style: normal;
 }
 
-html {
-	font-family:NanumGothic;
+body, input, button, select, option, textarea {
+	font-family:'Nanum Gothic';
 }

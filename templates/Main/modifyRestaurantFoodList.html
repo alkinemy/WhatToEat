@@ -1,7 +1,7 @@
 {% extends "Layout/base_restaurant.html" %}
 
 {% block contentTitle %}
-<h1>밥 뭐 먹지? - 음식 리스트 수정</h1>
+<h1><a href="{% url 'index' %}">밥 뭐 먹지?</a> - 음식 리스트 수정</h1>
 {% endblock %}
 
 {% block script %}
@@ -9,7 +9,8 @@
 <script type="text/javascript">
 	var modifyFoodDetailUrl = "{% url 'modifyFoodDetail' restaurant.pk %}";
 	var returnRestaurantDetailUrl = "{% url 'restaurantDetail' restaurant.pk %}";
-	var addNewFoodUrl = "{%url 'addNewFood' restaurant.pk %}";
+	var addNewFoodUrl = "{% url 'addNewFood' restaurant.pk %}";
+	var deleteFoodUrl = "{% url 'deleteFood' restaurant.pk %}";
 </script>
 {% endblock %}
 
@@ -63,10 +64,10 @@
 			</td>
 		</tr>
 		{% for food in food_list %}
-		<form class="modifyFoodForm" name="modify_food" action="">
-		{% csrf_token %}
+		<tr>
+			<form class="modifyFoodForm" name="modify_food" action="">
+			{% csrf_token %}
 			<input class="food_pk" type="hidden" name="food_pk" value="{{ food.pk }}" />
-			<tr>
 				<td>
 					이름
 				</td>
@@ -86,10 +87,11 @@
 					<input class="textboxFoodDetail" type="textbox" name="food_detail" value="{{ food.Detail }}" />
 				</td>
 				<td>
-					<input class="modifyFoodForm" type="submit" name="modify_food_submit" value="수정 적용" />
+					<input class="modifyFoodForm" type="submit" name="modify_food_submit" value="수정" />
+					<button class="deleteFood" type="button">삭제</button>
 				</td>
-			</tr>
-		</form>
+			</form>
+		</tr>
 		{% endfor %}
 	</tbody>
 </table>

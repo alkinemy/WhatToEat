@@ -222,6 +222,35 @@ def loadModifyRestaurantFoodList(request, restaurant_pk):
 	food_list = Foods.objects.filter(Restaurant=restaurant_pk)
 	return render(request, 'Main/modifyRestaurantFoodList.html', {'restaurant':restaurant, 'food_list':food_list})
 
+@csrf_protect
+def deleteFood(request, restaurant_pk):
+	try:
+		restaurant = Restaurants.objects.get(pk=restaurant_pk)
+		
+		food_pk = request.POST.get('food_pk')
+
+		food = Foods.objects.get(pk=food_pk)
+		food.delete()
+
+		result = \
+		[
+			{
+				"state":"0",
+			}
+		]
+
+		return HttpResponse(json.dumps(result), content_type='application/json')
+	except Exception,e:
+		result = \
+		[
+			{
+				"state":"1"
+			}
+		]
+
+		print(e)
+		return HttpResponse(json.dumps(result), content_type='application/json')
+
 def addNewFood(request, restaurant_pk):
 	try:
 		restaurant = Restaurants.objects.get(pk=restaurant_pk)
@@ -338,6 +367,8 @@ def modifyOldRestaurant(request, restaurant_pk):
 
 		print(e)
 		return HttpResponse(json.dumps(result), content_type='application/json')
+
+
 
 
 @csrf_protect
