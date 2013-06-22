@@ -16,6 +16,17 @@ from recommend_food.models import Categories, Regions, Restaurants, Foods
 def index(request):
 	return render(request, 'Main/index.html')
 
+
+@csrf_protect
+def whatToDo(request):
+	try:
+		pass		
+		return HttpResponse(json.dumps(result), content_type='application/json')
+
+	except Exception,e:
+		print(e)
+		return HttpResponse(json.dumps(result), content_type='application/json')
+
 #메인화면에서 검색하는걸 기준으로 작성
 @csrf_protect
 def search(request):

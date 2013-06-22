@@ -89,11 +89,11 @@ $(document).ready(function() {
 		event.preventDefault();
 	});
 
-	$('input[name=category]').click(function(t) {
+	$('#advancedFoodSearcher:input[name=category]').click(function() {
 		getRestaurantList();
 	});
 
-	$('input[name=region]').click(function(t) {
+	$('#advancedFoodSearcher:input[name=region]').click(function() {
 		getRestaurantList();
 	});
 

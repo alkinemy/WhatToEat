@@ -33,3 +33,9 @@ class Foods(models.Model):
 
 	def __unicode__(self):
 		return self.Name
+
+class ToDo(models.Model):
+	Name = models.CharField(max_length=200)
+
+	def __unicode__(self):
+		return self.Name
